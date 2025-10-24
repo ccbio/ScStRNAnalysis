@@ -370,7 +370,7 @@ res.sep$prop = res.sep$prop[rev(order(res.sep$prop$Resistant2vs1,res.sep$prop$Re
 
 
 #########
-###########spatial : show MIF+ tumor cells and CD4/CD8 TEX
+###########spatial : show MIF+ cells and CD4/CD8 TEX
 
 
 load("RCTD_eso.sp.Rdata")
