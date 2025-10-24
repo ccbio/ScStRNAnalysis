@@ -79,7 +79,7 @@ write.table(cnv_score,"results/epi/cnv_scores_epithelial_cells.infercnv.txt",sep
 
 ############RUN NMF
 ##functions
-###定义相应函数
+###
 GetData = function(
     srt,
     genes = NULL,
@@ -391,7 +391,7 @@ saveRDS(malignant_list_names,file='results/epi/ESCCepi/runNMF/malignant_list_nam
 
 newnames = NULL
 for(i in malignant_list_names){
-  if(length(ESCCepi$orig.ident[ESCCepi$orig.ident == i]) >= 100 & length(ESCCepi$orig.ident[ESCCepi$orig.ident == i]) <= 1000 ){
+  if(length(ESCCepi$orig.ident[ESCCepi$orig.ident == i]) >= 100 & length(ESCCepi$orig.ident[ESCCepi$orig.ident == i]) <= 1000 ){ # 100-1000; 1000-2000; 2000-3000; 3000-4000; ...
     newnames = c(newnames, i)
     saveRDS(malignant_list[[i]],file = paste0('results/epi/ESCCepi/runNMF/malignant_RDS/',i,'_malignant_Seurat.RDS'))
   }
@@ -422,10 +422,10 @@ for(i in malignant_list_names) {
   data <- data[VariableFeatures(obj),]
   data[data < 0] <- 0
   data <- data[apply(data, 1, var) > 0, ]
-  res.list <- parallel::mclapply(5:13, function(r){
+  res.list <- parallel::mclapply(5:15, function(r){
     nmf(data, rank = r, nrun = 1, seed = 'ica', method = 'nsNMF')
   }, mc.cores = 4)
-  names(res.list) = 5:13
+  names(res.list) = 5:15
   saveRDS(res.list,file = paste0("results/epi/ESCCepi/runNMF/run/",i,"res.list.rds"))
   show(paste0(i, " is already over!"))
 }
@@ -713,7 +713,7 @@ for (i in 1:length(mo)){
     #geom_text(aes(label = Prop), stat="identity",colour = "black",position = position_fill(vjust = 0.5)) +
     theme(panel.grid =element_blank()) +
     labs(x="",y="Cell proportion")+
-    scale_y_continuous(labels = c(0,0.25,0.5,0.75,1))+ ####用来将y轴移动位置
+    scale_y_continuous(labels = c(0,0.25,0.5,0.75,1))+
     theme(axis.text = element_text(size=12, colour = "black"))+
     theme(axis.title.y = element_text(size=12, colour = "black"))+
     theme(panel.border = element_rect(size = 1, linetype = "solid", colour = "black"))+
